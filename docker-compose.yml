@@ -1,0 +1,34 @@
+services:
+  db_generator:
+    build: .
+    command: python generate_db.py
+    volumes:
+      - ./db:/app/db
+      - .:/app
+
+  old_way:
+    build: .
+    command: python old_way.py
+    environment:
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+    volumes:
+      - ./db:/app/db
+      - .:/app
+
+  new_way:
+    build: .
+    command: python new_way.py
+    environment:
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+    volumes:
+      - ./db:/app/db
+      - .:/app
+
+  compare:
+    build: .
+    command: python compare.py
+    environment:
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+    volumes:
+      - ./db:/app/db
+      - .:/app
